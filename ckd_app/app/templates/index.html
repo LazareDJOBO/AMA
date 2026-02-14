@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction CKD - IA Médicale</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Prédiction de la Maladie Rénale Chronique</h1>
+            <p>Analyse IA basée sur vos données cliniques</p>
+        </header>
+
+        <main>
+            <section class="form-section">
+                <h2>Données du Patient</h2>
+                <form id="prediction-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="age">Âge (ans)</label>
+                            <input type="number" id="age" required min="1" max="120" placeholder="Ex: 45">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sexe">Sexe</label>
+                            <select id="sexe" required>
+                                <option value="" disabled selected>Choisir...</option>
+                                <option value="M">Homme</option>
+                                <option value="F">Femme</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="creatinine">Créatinine (mg/L)</label>
+                            <input type="number" id="creatinine" step="0.1" required min="0" placeholder="Ex: 12.5">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="uree">Urée (g/L)</label>
+                            <input type="number" id="uree" step="0.01" required min="0" placeholder="Ex: 0.35">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="temperature">Température (°C)</label>
+                            <input type="number" id="temperature" step="0.1" required min="35" max="43" placeholder="Ex: 37.0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cholesterol_ldl">Cholestérol LDL</label>
+                            <select id="cholesterol_ldl" required>
+                                <option value="" disabled selected>Choisir...</option>
+                                <option value="Réduit">Réduit</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Augmenté">Augmenté</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cholesterol_total">Cholestérol Total</label>
+                            <select id="cholesterol_total" required>
+                                <option value="" disabled selected>Choisir...</option>
+                                <option value="Réduit">Réduit</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Augmenté">Augmenté</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="predict-btn">
+                        <span class="btn-text">Lancer l'analyse</span>
+                        <div class="loader" id="loader"></div>
+                    </button>
+                </form>
+            </section>
+
+            <section id="result-section" class="result-section hidden">
+                <h2>Résultats de l'Analyse</h2>
+                
+                <div class="stage-card">
+                    <h3>Stade Prédit</h3>
+                    <div class="stage-display">
+                        <span id="predicted-stage" class="stage-number">-</span>
+                    </div>
+                    <p id="stage-description" class="stage-desc"></p>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="probabilityChart"></canvas>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Pied de page médical - Utilisation à titre indicatif uniquement.</p>
+        </footer>
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
